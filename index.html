@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Palace - Full Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff5e6;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #c11a2b;
+            color: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .menu-category {
+            text-align: center;
+            color: #c11a2b;
+            font-size: 2.2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff8c00;
+        }
+        
+        .food-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .food-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .food-header {
+            background-color: #ff8c00;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        
+        .food-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 5px dashed #ff8c00;
+        }
+        
+        .food-details {
+            padding: 20px;
+        }
+        
+        .food-description {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.95rem;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .food-price {
+            font-size: 1.6rem;
+            color: #c11a2b;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .order-btn {
+            background-color: #c11a2b;
+            color: white;
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+        
+        .order-btn:hover {
+            background-color: #9e1523;
+            transform: scale(1.05);
+        }
+        
+        .cart-btn {
+            background-color: #ff8c00;
+            color: white;
+            flex-grow: 1;
+            margin-left: 8px;
+        }
+        
+        .cart-btn:hover {
+            background-color: #e67e00;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #333;
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+        
+        
+        .message-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            display: none;
+        }
+        
+        .order-message {
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .cart-message {
+            border-left: 5px solid #ff8c00;
+        }
+        
+        .order-message h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .cart-message h2 {
+            color: #ff8c00;
+            margin-bottom: 10px;
+        }
+        
+       
+        #order-message-1:target,
+        #order-message-2:target,
+        #order-message-3:target,
+        #order-message-4:target,
+        #order-message-5:target,
+        #order-message-6:target,
+        #order-message-7:target,
+        #order-message-8:target,
+        #order-message-9:target {
+            display: block;
+        }
+        
+        #cart-message-1:target,
+        #cart-message-2:target,
+        #cart-message-3:target,
+        #cart-message-4:target,
+        #cart-message-5:target,
+        #cart-message-6:target,
+        #cart-message-7:target,
+        #cart-message-8:target,
+        #cart-message-9:target {
+            display: block;
+        }
+        
+       
+        .simple-cart {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 2px dashed #ddd;
+        }
+        
+        .simple-cart h3 {
+            color: #c11a2b;
+            margin-bottom: 15px;
+        }
+        
+        .simple-cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .food-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .food-card {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PIZZA PALACE</h1>
+            <p class="tagline">Authentic Italian Food Delivered to Your Doorstep</p>
+        </div>
+    </header>
+    
+    <div class="container">
+       
+        <h2 class="menu-category">PIZZAS</h2>
+        <div class="food-container">
+            
+            <div class="food-card">
+                <div class="food-header">Margherita Pizza</div>
+                <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Margherita Pizza" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Classic Italian pizza with fresh tomato sauce, mozzarella cheese, and basil leaves.</p>
+                    <div class="food-price">$14.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-1" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-1" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="food-card">
+                <div class="food-header">Pepperoni Pizza</div>
+                <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1180&q=80" alt="Pepperoni Pizza" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Loaded with spicy pepperoni slices and mozzarella cheese on signature tomato sauce.</p>
+                    <div class="food-price">$16.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-2" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-2" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="food-card">
+                <div class="food-header">BBQ Chicken Pizza</div>
+                <img src="https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="BBQ Chicken Pizza" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Grilled chicken, red onions, cilantro, and smoky BBQ sauce on a crispy crust.</p>
+                    <div class="food-price">$18.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-3" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-3" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+        <h2 class="menu-category">PASTA</h2>
+        <div class="food-container">
+            
+            <div class="food-card">
+                <div class="food-header">Spaghetti Carbonara</div>
+                <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1171&q=80" alt="Spaghetti Carbonara" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Classic Roman pasta with eggs, cheese, pancetta, and black pepper.</p>
+                    <div class="food-price">$15.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-4" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-4" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="food-card">
+                <div class="food-header">Fettuccine Alfredo</div>
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Fettuccine Alfredo" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Creamy Parmesan sauce with fettuccine pasta, garlic, and parsley.</p>
+                    <div class="food-price">$14.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-5" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-5" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div class="food-card">
+                <div class="food-header">Lasagna Bolognese</div>
+                <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1335&q=80" alt="Lasagna Bolognese" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Layers of pasta, rich meat sauce, béchamel, and melted cheese.</p>
+                    <div class="food-price">$17.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-6" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-6" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <h2 class="menu-category">APPETIZERS</h2>
+        <div class="food-container">
+            
+            <div class="food-card">
+                <div class="food-header">Garlic Bread</div>
+                <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Fresh Garlic Bread" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Freshly baked bread with garlic butter, herbs, and melted mozzarella.</p>
+                    <div class="food-price">$8.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-7" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-7" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+          
+            <div class="food-card">
+                <div class="food-header">Bruschetta</div>
+                <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1171&q=80" alt="Bruschetta" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Toasted bread topped with tomatoes, garlic, fresh basil, and olive oil.</p>
+                    <div class="food-price">$9.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-8" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-8" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="food-card">
+                <div class="food-header">Mozzarella Sticks</div>
+                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Mozzarella Sticks" class="food-image">
+                <div class="food-details">
+                    <p class="food-description">Breaded mozzarella cheese sticks, fried golden brown with marinara sauce.</p>
+                    <div class="food-price">$10.99</div>
+                    <div class="action-buttons">
+                        <a href="#order-message-9" class="btn order-btn">Order Now</a>
+                        <a href="#cart-message-9" class="btn cart-btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="order-message-1" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Margherita Pizza order has been placed. It will be ready in 20 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-2" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Pepperoni Pizza order has been placed. It will be ready in 20 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-3" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your BBQ Chicken Pizza order has been placed. It will be ready in 25 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-4" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Spaghetti Carbonara order has been placed. It will be ready in 15 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-5" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Fettuccine Alfredo order has been placed. It will be ready in 15 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-6" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Lasagna Bolognese order has been placed. It will be ready in 30 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-7" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Garlic Bread order has been placed. It will be ready in 10 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-8" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Bruschetta order has been placed. It will be ready in 10 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="order-message-9" class="message-box order-message">
+            <h2>Order Confirmed!</h2>
+            <p>Your Mozzarella Sticks order has been placed. It will be ready in 12 minutes.</p>
+            <p>Thank you for ordering from Pizza Palace!</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <!-- CART MESSAGES -->
+        <div id="cart-message-1" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Margherita Pizza has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-2" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Pepperoni Pizza has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-3" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>BBQ Chicken Pizza has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-4" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Spaghetti Carbonara has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-5" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Fettuccine Alfredo has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-6" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Lasagna Bolognese has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-7" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Garlic Bread has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-8" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Bruschetta has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        <div id="cart-message-9" class="message-box cart-message">
+            <h2>Added to Cart!</h2>
+            <p>Mozzarella Sticks has been added to your cart.</p>
+            <a href="#" style="color: #c11a2b; text-decoration: none; display: inline-block; margin-top: 15px;">Close Message</a>
+        </div>
+        
+        
+        <div class="cart-summary">
+            <h2>Your Order Summary</h2>
+            <p>Click "Add to Cart" on any item to add it to your order. Click "Order Now" to place your order immediately.</p>
+            
+            <div class="simple-cart">
+                <h3>Sample Order (Static Example)</h3>
+                <div class="simple-cart-item">
+                    <span>Margherita Pizza</span>
+                    <span>$14.99</span>
+                </div>
+                <div class="simple-cart-item">
+                    <span>Garlic Bread</span>
+                    <span>$8.99</span>
+                </div>
+                <div class="simple-cart-item">
+                    <span>Mozzarella Sticks</span>
+                    <span>$10.99</span>
+                </div>
+                <div class="simple-cart-item" style="font-weight: bold; border-top: 2px solid #ccc; margin-top: 5px; padding-top: 10px;">
+                    <span>Total</span>
+                    <span>$34.97</span>
+                </div>
+            </div>
+            
+            <div class="cart-total" style="margin-top: 20px;">To place an order, click "Order Now" on any item</div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Pizza Palace. All rights reserved.</p>
+            <p>123 Pizza Street, Naples, Italy | Phone: +39 123 456 7890 | Hours: 11AM-11PM Daily</p>
+        </div>
+    </footer>
+</body>
+</html>
